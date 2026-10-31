@@ -1,0 +1,57 @@
+# t03 - the project's source trees, read directly
+
+$ git -C core log -1 --format='%H %cs'
+50105e67ed9ea901d79442804e573bbaf9d9b03b 2026-10-30
+
+# the factory configuration ships in the core tree as src/etc/config.xml.sample
+$ wc -l core/src/etc/config.xml.sample
+172 core/src/etc/config.xml.sample
+
+# where the running system keeps it (from the MVC app config):
+43:        'configDir'      => '/conf',
+
+# the factory defaults that matter (grep of the sample):
+  <trigger_initial_wizard/>
+    <hostname>OPNsense</hostname>
+    <domain>internal</domain>
+    <timezone>Etc/UTC</timezone>
+      <enable>1</enable>
+      <ipaddr>dhcp</ipaddr>
+      <blockpriv>1</blockpriv>
+      <blockbogons>1</blockbogons>
+      <enable>1</enable>
+      <ipaddr>192.168.1.1</ipaddr>
+      <subnet>24</subnet>
+    <enable>1</enable>
+    <port>53053</port>
+      <start_addr>192.168.1.100</start_addr>
+      <end_addr>192.168.1.199</end_addr>
+      <start_addr>::1000</start_addr>
+      <end_addr>::2000</end_addr>
+    <enable>1</enable>
+      <mode>automatic</mode>
+
+# the shipped default user rules (descriptions):
+      <description>System Administrators</description>
+            <description>Default allow LAN to any rule</description>
+            <description>Default allow LAN IPv6 to any rule</description>
+
+# MVC models present in the core tree (one per subsystem):
+Auth Base CaptivePortal Core Cron DHCRelay Diagnostics Dnsmasq Firewall Hostdiscovery IDS IPsec Interfaces Kea Monit Ntpd OpenVPN Radvd Routes Routing Syslog TrafficShaper Trust Unbound Wireguard 
+
+# configd action files (one per service):
+31
+
+# plugins repository (opnsense/plugins, tree via GitHub API):
+102 plugin directories with a Makefile, by category:
+benchmarks 1, databases 1, devel 3, dns 4, emulators 1, ftp 1, mail 2, misc 6,
+net 27, net-mgmt 8, security 20, sysutils 20, vendor 1, www 7
+# packaged and installed as os-<name>; e.g. net/zerotier -> os-zerotier,
+# security/tailscale -> os-tailscale, vendor/sunnyvalley -> os-sunnyvalley
+
+# how the images are signed (opnsense/tools, build/common.sh, sign_image):
+		openssl dgst -sha256 -sign "${PRODUCT_PRIVKEY}" "${1}" | \
+		    openssl base64 > "${1}".sig
+	else
+		echo -n ">>> Retaining ${PRODUCT_SETTINGS} signature for $(basename ${1}): "
+# build/nano.sh final steps: makefs (3G) -> gpart create -s BSD -> sign_image

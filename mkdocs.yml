@@ -1,0 +1,32 @@
+site_name: OPNsense for Mere Mortals
+site_description: A FreeBSD firewall and routing platform you run on your own hardware. Choosing a box and an image, proving the download with checksums and signatures, reading the factory configuration, and the working core of rules, NAT, DNS, VPNs and updates, with the limits stated plainly.
+site_url: https://paulsullivan33-dev.github.io/opnsense-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What OPNsense Is: what-opnsense-is.md
+  - The Moving Parts: the-moving-parts.md
+  - The Fork — OPNsense and pfSense: the-fork.md
+  - Choosing Hardware: choosing-hardware.md
+  - Getting the Images: getting-the-images.md
+  - Anatomy of the Nano Image: anatomy-of-the-nano-image.md
+  - Installing and First Configuration: installing-and-first-configuration.md
+  - config.xml — The Whole Firewall in One File: config-xml.md
+  - Firewall Rules: firewall-rules.md
+  - NAT and Port Forwards: nat.md
+  - DHCP and DNS: dhcp-and-dns.md
+  - VPNs: vpn.md
+  - Intrusion Prevention: intrusion-prevention.md
+  - Plugins and Updates: plugins-and-updates.md
+  - High Availability: high-availability.md
+  - The Neighbours: the-neighbours.md
+  - Limits: limits.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md

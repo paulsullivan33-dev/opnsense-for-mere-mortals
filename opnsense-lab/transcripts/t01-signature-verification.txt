@@ -1,0 +1,15 @@
+# t01 - OpenSSL signature verification (procedure per docs.opnsense.org/manual/install.html)
+# public key: OPNsense-26.7.pub from the mirror; byte-identical to the key
+# printed in the mirror README for release 26.7 (compared with python3).
+
+$ openssl base64 -d -in OPNsense-26.7-checksums-amd64.sha256.sig -out checksums.sig.bin
+$ openssl dgst -sha256 -verify OPNsense-26.7.pub -signature checksums.sig.bin OPNsense-26.7-checksums-amd64.sha256
+Verified OK
+
+$ openssl base64 -d -in OPNsense-26.7-nano-amd64.img.sig -out image.sig.bin
+$ openssl dgst -sha256 -verify OPNsense-26.7.pub -signature image.sig.bin OPNsense-26.7-nano-amd64.img   # the UNCOMPRESSED image, signatures are made before compression
+Verified OK
+
+# uncompressed image, for the record:
+-rw-rw---- 1 root root 3221225472 Oct 31 00:55 OPNsense-26.7-nano-amd64.img
+c376b498338e9e0ddd785ac447f933e940f7d556810779475eecef30d37fcb98  OPNsense-26.7-nano-amd64.img

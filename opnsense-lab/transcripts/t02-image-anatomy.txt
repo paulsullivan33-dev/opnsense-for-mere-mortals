@@ -1,0 +1,28 @@
+# t02 - anatomy of OPNsense-26.7-nano-amd64.img (3,221,225,472 bytes)
+
+$ file OPNsense-26.7-nano-amd64.img
+OPNsense-26.7-nano-amd64.img: DOS/MBR boot sector, BSD disklabel
+
+# MBR partition table + BSD disklabel, parsed with python3:
+MBR entry 0: boot_flag=0x00 type=0x00 first_lba=0 sectors=0
+MBR entry 1: boot_flag=0x00 type=0x00 first_lba=0 sectors=0
+MBR entry 2: boot_flag=0x00 type=0x00 first_lba=0 sectors=0
+MBR entry 3: boot_flag=0x80 type=0xa5 first_lba=0 sectors=50000
+BSD disklabel magic 0x82564557 present: True
+disklabel d_secperunit: 6291456 sectors = 3221225472 bytes
+disklabel d_npartitions: 8
+  partition a: size=6291456 sectors offset=0 fstype=7 (7 = UFS)
+  partition c: size=6291456 sectors offset=0 fstype=0 (7 = UFS)
+UFS2 magic (0x19540119) found at byte offsets: [3959, 4210, 66908, 99676]
+  66908 = 65536 (UFS2 superblock offset) + 1372 (0x55c, magic field) -> primary superblock
+
+$ 7z l OPNsense-26.7-nano-amd64.img
+
+ERROR: OPNsense-26.7-nano-amd64.img : Cannot open the file as archive
+
+
+
+Errors: 1
+
+# The UFS2 filesystem itself cannot be mounted or listed on this Linux lab:
+# no loop devices, no UFS reader in the available tools (7z cannot open it either).
